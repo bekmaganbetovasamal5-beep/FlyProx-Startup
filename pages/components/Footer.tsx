@@ -15,7 +15,7 @@ export default function Footer() {
       { name: 'Press', href: '#' },
     ],
     support: [
-      { name: 'Help Center', href: '#' },
+      { name: 'Help Center', href: '/help-center' },
       { name: 'Contact Us', href: '#contact' },
       { name: 'Status', href: '#' },
       { name: 'Community', href: '#' },

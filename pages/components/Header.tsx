@@ -40,8 +40,8 @@ export default function Header() {
             <Link href="/pricing" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
               Pricing
             </Link>
-            <Link href="#resources" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
-              Resources
+            <Link href="/help-center" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
+              Help Center
             </Link>
             <Link href="#about" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
               About
@@ -92,10 +92,10 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-sm border-b border-yellow-500/20">
             <div className="px-4 py-6 space-y-4">
-              {['Products', 'Pricing', 'Resources', 'About'].map((item) => (
+              {['Products', 'Pricing', 'Help Center', 'About'].map((item) => (
                 <Link
                   key={item}
-                  href={`#${item.toLowerCase()}`}
+                  href={item === 'Help Center' ? '/help-center' : `#${item.toLowerCase().replace(' ', '-')}`}
                   className="block text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
