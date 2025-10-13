@@ -38,6 +38,13 @@
 - Responsive design for all screen sizes
 - Professional gradient effects and dark theme
 
+## [1.1.2] - 2025-01-13 15:55
+### Fixed
+- Исправлен размер логотипа - теперь "FlyProx" и "AI" имеют одинаковый размер (text-2xl)
+- Убран пробел между "FlyProx" и "AI" - теперь логотип выглядит как "FlyProxAI" слитно
+- Логотип исправлен в Header.tsx и Footer.tsx
+- Улучшена визуальная согласованность бренда по всему сайту
+
 ### Technical Details
 - Tailwind CSS v4.1.14
 - PostCSS configuration

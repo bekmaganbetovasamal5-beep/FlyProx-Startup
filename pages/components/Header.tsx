@@ -29,7 +29,7 @@ export default function Header() {
               <span className="text-black font-bold text-xl">FP</span>
             </div>
             <span className="text-2xl font-bold text-white">FlyProx</span>
-            <span className="text-lg font-bold text-yellow-400">AI</span>
+            <span className="text-2xl font-bold text-yellow-400">AI</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -37,7 +37,7 @@ export default function Header() {
             <Link href="#products" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
               Products
             </Link>
-            <Link href="#pricing" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
+            <Link href="/pricing" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
               Pricing
             </Link>
             <Link href="#resources" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">

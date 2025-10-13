@@ -80,7 +80,7 @@ export default function Footer() {
                   <span className="text-black font-bold text-xl">FP</span>
                 </div>
                 <span className="text-2xl font-bold text-white">FlyProx</span>
-                <span className="text-lg font-bold text-yellow-400">AI</span>
+                <span className="text-2xl font-bold text-yellow-400">AI</span>
               </div>
               <p className="text-gray-400 mb-6 max-w-xs">
                 Transform your sales and support with intelligent AI voice agents that work 24/7.
