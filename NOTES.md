@@ -80,10 +80,7 @@ docker-compose logs  # Просмотр логов
 ## 📚 Полезные ресурсы
 
 ### Документация
-- [Express.js Documentation](https://expressjs.com/)
-- [PostgreSQL Node.js](https://node-postgres.com/)
-- [Redis Node.js](https://github.com/redis/node-redis)
-- [Docker Documentation](https://docs.docker.com/)
+
 
 ### MCP
 - [Model Context Protocol](https://modelcontextprotocol.io/)
