@@ -8,7 +8,10 @@
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
-    "backend": "node index.js"
+    "backend": "node index.js",
+    "sentry:build": "next build",
+    "sentry:test": "next build && next start",
+    "sentry:emit": "sentry-cli releases files $SENTRY_RELEASE dist/"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.19.0",
