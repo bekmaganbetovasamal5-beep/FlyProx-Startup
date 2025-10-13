@@ -9,3 +9,12 @@ Everytime read instructions from file API_DOCS.md , ARCHITECTURE.md , CHANGELOG.
 2. Обнови файл summary.md с текущим состоянием проекта
 
 Файлы находятся в корне проекта:
+
+Architecture
+Supabase OAuth
+Frontend (Next.js + Tailwind CSS + Supabase Auth)
+Express API (Routes → Controllers → Services)
+PostgreSQL 
+↓
+MCP Integrations 
+
