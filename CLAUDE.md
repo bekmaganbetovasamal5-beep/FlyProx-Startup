@@ -1,4 +1,6 @@
-Everytime read instructions from file API_DOCS.md , ARCHITECTURE.md , CHANGELOG.md ,CONTRIBUTING.md, DEPLOYMENT.md NOTES.md openapi.yaml SUMMARY.md TODO.md
+Everytime read instructions from file 
+NOTES.md
+API_DOCS.md , ARCHITECTURE.md , CHANGELOG.md ,CONTRIBUTING.md, DEPLOYMENT.md NOTES.md openapi.yaml SUMMARY.md TODO.md
 
 При каждом изменении кода:
 1. Обнови файл changelog.md с описанием изменений в формате:
