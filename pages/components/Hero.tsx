@@ -1,13 +1,6 @@
-import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Hero() {
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Email submitted:', email);
-  };
-
   return (
     <section className="min-h-screen flex items-start justify-center relative overflow-hidden bg-black pt-32">
       {/* Background gradient effects */}
@@ -41,48 +34,23 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
-          <button className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-yellow-500/25">
-            Start Free Trial
+          <button
+            onClick={() => window.location.href = '/sign-in'}
+            className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-yellow-500/25"
+          >
+            Get Started
           </button>
-          <button className="px-8 py-4 border border-yellow-400 text-yellow-400 font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 flex items-center justify-center">
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+          <a
+            href="/sign-in"
+            className="px-8 py-4 border border-yellow-400 text-yellow-400 font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 flex items-center justify-center"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
             </svg>
-            Watch Demo
-          </button>
+            Sign In
+          </a>
         </div>
 
-        {/* Email signup */}
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-          <div className="flex flex-col sm:flex-row gap-2">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
-              required
-            />
-            <button type="submit" className="px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300">
-              Get Started
-            </button>
-          </div>
-          <p className="text-sm text-gray-500 mt-3">
-            No credit card required • 14-day free trial
-          </p>
-        </form>
-
-        {/* Social proof */}
-        <div className="mt-20">
-          <p className="text-gray-500 mb-8">Trusted by leading companies</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            {['Microsoft', 'Google', 'Amazon', 'Meta', 'Apple'].map((company) => (
-              <div key={company} className="w-24 h-8 bg-gray-800 rounded flex items-center justify-center">
-                <span className="text-xs text-gray-500">{company}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Scroll indicator */}

@@ -10,6 +10,7 @@ export default function Testimonials() {
       role: 'CEO at TechStart',
       company: 'TechStart Inc.',
       avatar: 'SJ',
+      gender: 'female',
       content: 'FlyProx AI has transformed our sales process. We\'ve seen a 300% increase in qualified leads and our conversion rate has never been higher. The AI agents handle initial conversations perfectly, allowing our team to focus on closing deals.',
       rating: 5,
       metrics: {
@@ -23,6 +24,7 @@ export default function Testimonials() {
       role: 'Sales Director',
       company: 'Growth Corp',
       avatar: 'MC',
+      gender: 'male',
       content: 'We were skeptical about AI handling customer interactions, but FlyProx AI exceeded our expectations. The natural conversation flow and ability to understand complex queries is remarkable. Our customers love the instant responses.',
       rating: 5,
       metrics: {
@@ -36,6 +38,7 @@ export default function Testimonials() {
       role: 'Operations Manager',
       company: 'ServicePro',
       avatar: 'ER',
+      gender: 'female',
       content: 'Implementation was seamless and the ROI was immediate. We\'ve reduced operational costs by 40% while improving customer satisfaction scores. The analytics dashboard gives us insights we never had before.',
       rating: 5,
       metrics: {
@@ -49,6 +52,7 @@ export default function Testimonials() {
       role: 'Founder',
       company: 'StartupHub',
       avatar: 'DK',
+      gender: 'male',
       content: 'As a startup, we needed to scale our sales efforts without hiring a large team. FlyProx AI was the perfect solution. We can handle hundreds of conversations simultaneously without missing a beat.',
       rating: 5,
       metrics: {
@@ -62,6 +66,7 @@ export default function Testimonials() {
       role: 'VP of Sales',
       company: 'Enterprise Solutions',
       avatar: 'LT',
+      gender: 'female',
       content: 'The custom voice training and integration capabilities set FlyProx AI apart. It truly feels like part of our team. Our sales cycle has shortened by 30% and our team is more productive than ever.',
       rating: 5,
       metrics: {
@@ -75,11 +80,26 @@ export default function Testimonials() {
       role: 'Customer Success Lead',
       company: 'GlobalTech',
       avatar: 'JW',
+      gender: 'male',
       content: 'Our customer satisfaction scores improved dramatically after implementing FlyProx AI. The AI agents are empathetic, knowledgeable, and available whenever our customers need them. It\'s been a game-changer.',
       rating: 5,
       metrics: {
         value: '95%',
         label: 'Customer satisfaction score'
+      }
+    },
+    {
+      id: 7,
+      name: 'Alexandra Petrova',
+      role: 'Marketing Director',
+      company: 'InnovateTech Solutions',
+      avatar: 'AP',
+      gender: 'female',
+      content: 'FlyProx AI has revolutionized our lead generation process. We\'ve seen a 500% increase in qualified leads and our conversion rate has tripled. The AI agents handle initial screening perfectly, allowing our sales team to focus on high-value prospects.',
+      rating: 5,
+      metrics: {
+        value: '500%',
+        label: 'Increase in qualified leads'
       }
     }
   ];
@@ -98,8 +118,8 @@ export default function Testimonials() {
         {/* Section header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Trusted by
-            <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent"> Industry Leaders</span>
+            Customer
+            <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent"> Testimonials</span>
           </h2>
           <p className="text-xl text-gray-400">
             See what our customers have to say about their experience with FlyProx AI
@@ -112,8 +132,12 @@ export default function Testimonials() {
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
               {/* Avatar */}
               <div className="flex-shrink-0">
-                <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-2xl font-bold text-black">
-                  {testimonials[activeTestimonial].avatar}
+                <div className="w-20 h-20 rounded-full overflow-hidden">
+                  <img
+                    src={`https://randomuser.me/api/portraits/${testimonials[activeTestimonial].gender === 'female' ? 'women' : 'men'}/${testimonials[activeTestimonial].id}.jpg`}
+                    alt={testimonials[activeTestimonial].name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
 
@@ -194,8 +218,12 @@ export default function Testimonials() {
           {testimonials.slice(1, 7).map((testimonial) => (
             <div key={testimonial.id} className="p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-300">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-lg font-bold text-black mr-4">
-                  {testimonial.avatar}
+                <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                  <img
+                    src={`https://randomuser.me/api/portraits/${testimonial.gender === 'female' ? 'women' : 'men'}/${testimonial.id}.jpg`}
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   <h4 className="font-semibold text-white">{testimonial.name}</h4>
@@ -223,8 +251,11 @@ export default function Testimonials() {
           <h3 className="text-2xl font-bold mb-4 text-white">
             Ready to join thousands of satisfied customers?
           </h3>
-          <button className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105">
-            Start Your Free Trial
+          <button
+            onClick={() => window.location.href = '/sign-in'}
+            className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105"
+          >
+            Get Started
           </button>
         </div>
       </div>

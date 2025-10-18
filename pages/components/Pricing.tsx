@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Pricing() {
+  const router = useRouter();
   const [isAnnual, setIsAnnual] = useState(false);
 
   const plans = [
@@ -19,7 +21,7 @@ export default function Pricing() {
       ],
       notIncluded: ['Custom training', 'API access', 'Priority support'],
       popular: false,
-      cta: 'Start Free Trial',
+      cta: 'Sign In',
     },
     {
       name: 'Professional',
@@ -38,7 +40,7 @@ export default function Pricing() {
       ],
       notIncluded: ['Dedicated account manager', 'Custom training'],
       popular: true,
-      cta: 'Start Free Trial',
+      cta: 'Sign In',
     },
     {
       name: 'Enterprise',
@@ -155,6 +157,7 @@ export default function Pricing() {
 
               {/* CTA button */}
               <button
+                onClick={() => plan.cta !== 'Contact Sales' && router.push('/sign-in')}
                 className={`w-full py-3 rounded-lg font-semibold transition-all ${
                   plan.popular
                     ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105'
@@ -169,36 +172,7 @@ export default function Pricing() {
 
         {/* Additional info */}
         <div className="text-center mt-16">
-          <p className="text-gray-400 mb-4">
-            All plans include 14-day free trial • No credit card required
-          </p>
-          <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
-            <span className="flex items-center">
-              <svg className="w-4 h-4 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              Cancel anytime
-            </span>
-            <span className="flex items-center">
-              <svg className="w-4 h-4 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              No setup fees
-            </span>
-            <span className="flex items-center">
-              <svg className="w-4 h-4 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              24/7 support
-            </span>
-            <span className="flex items-center">
-              <svg className="w-4 h-4 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              API access (Pro+)
-            </span>
           </div>
-        </div>
       </div>
     </section>
   );

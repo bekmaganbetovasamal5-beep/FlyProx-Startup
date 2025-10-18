@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Header() {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -34,7 +36,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#products" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
+            <Link href="/#products" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
               Products
             </Link>
             <Link href="/pricing" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
@@ -43,17 +45,20 @@ export default function Header() {
             <Link href="/help-center" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
               Help Center
             </Link>
-            <Link href="#about" className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium">
-              About
-            </Link>
           </div>
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="px-4 py-2 text-yellow-400 border border-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-200 font-semibold">
+            <a href="/sign-in" className="px-4 py-2 text-yellow-400 border border-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-200 font-semibold">
               Sign In
-            </button>
-            <button className="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-200 transform hover:scale-105">
+            </a>
+            <button
+              onClick={() => {
+                console.log('Get Started button clicked');
+                window.location.href = '/sign-in';
+              }}
+              className="px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-200 transform hover:scale-105"
+            >
               Get Started
             </button>
           </div>
@@ -92,10 +97,16 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-sm border-b border-yellow-500/20">
             <div className="px-4 py-6 space-y-4">
-              {['Products', 'Pricing', 'Help Center', 'About'].map((item) => (
+              {['Products', 'Pricing', 'Help Center'].map((item) => (
                 <Link
                   key={item}
-                  href={item === 'Help Center' ? '/help-center' : `#${item.toLowerCase().replace(' ', '-')}`}
+                  href={
+                    item === 'Help Center'
+                      ? '/help-center'
+                      : item === 'Products'
+                        ? '/#products'
+                        : `#${item.toLowerCase().replace(' ', '-')}`
+                  }
                   className="block text-gray-300 hover:text-yellow-400 transition-colors duration-200 font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -103,10 +114,20 @@ export default function Header() {
                 </Link>
               ))}
               <div className="pt-4 space-y-3">
-                <button className="w-full px-4 py-2 text-yellow-400 border border-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-200 font-semibold">
+                <a
+                  href="/sign-in"
+                  className="w-full px-4 py-2 text-yellow-400 border border-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-200 font-semibold text-center block"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   Sign In
-                </button>
-                <button className="w-full px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-200">
+                </a>
+                <button
+                  onClick={() => {
+                    window.location.href = '/sign-in';
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-200"
+                >
                   Get Started
                 </button>
               </div>
