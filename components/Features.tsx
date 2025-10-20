@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 
 export default function Features() {
-  const router = useRouter();
   const [activeFeature, setActiveFeature] = useState(0);
 
   const features = [
@@ -123,18 +121,18 @@ export default function Features() {
             Join thousands of companies using AI to accelerate their growth
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => router.push('/sign-in')}
-              className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105"
+            <a
+              href="/sign-in"
+              className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105 text-center"
             >
               Get Started
-            </button>
-            <button
-              onClick={() => router.push('/sign-in')}
-              className="px-8 py-4 border border-yellow-400 text-yellow-400 font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300"
+            </a>
+            <a
+              href="/sign-in"
+              className="px-8 py-4 border border-yellow-400 text-yellow-400 font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 text-center"
             >
               Sign In
-            </button>
+            </a>
           </div>
         </div>
       </div>

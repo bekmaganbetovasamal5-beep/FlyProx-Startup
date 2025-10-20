@@ -182,17 +182,17 @@ export default function Testimonials() {
 
             {/* Navigation */}
             <div className="flex justify-center items-center mt-8 space-x-4">
-              <button
+              <a
                 onClick={prevTestimonial}
                 className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-              </button>
+              </a>
               <div className="flex space-x-2">
                 {testimonials.map((_, index) => (
-                  <button
+                  <a
                     key={index}
                     onClick={() => setActiveTestimonial(index)}
                     className={`w-2 h-2 rounded-full transition-all ${
@@ -201,14 +201,14 @@ export default function Testimonials() {
                   />
                 ))}
               </div>
-              <button
+              <a
                 onClick={nextTestimonial}
                 className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -251,12 +251,12 @@ export default function Testimonials() {
           <h3 className="text-2xl font-bold mb-4 text-white">
             Ready to join thousands of satisfied customers?
           </h3>
-          <button
-            onClick={() => window.location.href = '/sign-in'}
+          <a
+            href="/sign-in"
             className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105"
           >
             Get Started
-          </button>
+          </a>
         </div>
       </div>
     </section>
