@@ -13,11 +13,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div className="min-h-screen bg-black text-white">
-        <Hero />
-        <Features />
-        <Testimonials />
-      </div>
+      {/* Hero, Features, and Testimonials will be rendered with Header/Footer from _app.tsx */}
+      <Hero />
+      <Features />
+      <Testimonials />
     </>
   );
 }
