@@ -5,8 +5,8 @@ const nextConfig = {
   output: 'export',
   // Add trailing slash for consistent routes
   trailingSlash: true,
-  // Configure base path if needed for GitHub Pages
-  basePath: '/FlyProx-Startup', // Repository name for GitHub Pages
+  // basePath removed since using custom domain flyprox.com
+  // basePath: '/FlyProx-Startup', // Not needed for custom domain
   // Disable image optimization for static export
   images: {
     unoptimized: true,
