@@ -1,0 +1,459 @@
+import Head from 'next/head';
+import React, { useState } from 'react';
+
+export default function Pricing() {
+  const [callMinutes, setCallMinutes] = useState(5000);
+  const [selectedPlan, setSelectedPlan] = useState('business');
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+
+  // Calculate monthly pricing based on call minutes
+  const calculatePrice = (minutes) => {
+    const basePrice = 350; // Base price for 1000 minutes
+    const pricePerMinute = 0.35; // $0.35 per minute
+    return Math.round(basePrice + (minutes * pricePerMinute));
+  };
+
+  const monthlyPrice = calculatePrice(callMinutes);
+
+  const pricingPlans = [
+    {
+      id: 'basic',
+      name: 'Basic',
+      price: '$3,000',
+      period: 'one-time',
+      description: 'Perfect for small businesses getting started with AI voice agents',
+      features: [
+        'Self-guided implementation',
+        'You own all setup and configuration',
+        'Up to 3 months post-launch monitoring',
+        'Basic support structure',
+        'Up to 2 AI voice agents',
+        'Email support during business hours',
+        'Basic analytics dashboard',
+        'Standard voice quality'
+      ],
+      excludedFeatures: [
+        'Custom AI training',
+        'Priority support',
+        'Advanced analytics',
+        'Custom integrations'
+      ],
+      buttonText: 'Get Started',
+      popular: false
+    },
+    {
+      id: 'business',
+      name: 'Business',
+      price: '$6,000',
+      period: 'one-time',
+      description: 'Ideal for growing teams that need assisted implementation',
+      features: [
+        'Assisted implementation by FlyProxAI team',
+        'We help configure 1 AI agent',
+        'Life of contract monitoring',
+        'Monthly check-ins with Customer Success Manager',
+        'Monthly webinars and success reports',
+        'Up to 5 AI voice agents',
+        'Priority email & chat support',
+        'Advanced analytics dashboard',
+        'Custom voice training',
+        'Basic integrations setup'
+      ],
+      excludedFeatures: [
+        'Dedicated account manager',
+        'White-glove service',
+        'Custom AI model development'
+      ],
+      buttonText: 'Get Started',
+      popular: true
+    },
+    {
+      id: 'premium',
+      name: 'Premium',
+      price: 'Contact Sales',
+      period: '',
+      description: 'Fully managed service for enterprises that need comprehensive solutions',
+      features: [
+        'Fully managed implementation',
+        'FlyProxAI manages up to 10+ AI agents',
+        'Daily/weekly check-ins with dedicated team',
+        'We own all integrations and data imports',
+        'Custom AI model development',
+        'Dedicated account manager',
+        '24/7 phone, email, and chat support',
+        'Enterprise-grade analytics',
+        'Unlimited custom integrations',
+        'White-globe service',
+        'Custom SLAs',
+        'On-premise deployment options'
+      ],
+      excludedFeatures: [],
+      buttonText: 'Contact Sales',
+      popular: false
+    }
+  ];
+
+  const implementationTiers = [
+    {
+      minutes: 1000,
+      price: 700
+    },
+    {
+      minutes: 2500,
+      price: 1225
+    },
+    {
+      minutes: 5000,
+      price: 1750
+    },
+    {
+      minutes: 10000,
+      price: 3150
+    },
+    {
+      minutes: 25000,
+      price: 6125
+    },
+    {
+      minutes: 50000,
+      price: 10500
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "What's included in the one-time implementation fee?",
+      answer: "The implementation fee covers setup, configuration, training, and launch support. The level of service depends on the plan you choose - from self-guided setup to fully managed implementation."
+    },
+    {
+      question: "How are monthly call minutes billed?",
+      answer: "Call minutes are billed monthly based on usage. Unused minutes don't roll over, but you can adjust your plan at any time. Overages are billed at the same rate per minute."
+    },
+    {
+      question: "Can I change my plan later?",
+      answer: "Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle."
+    },
+    {
+      question: "What happens if I exceed my call minutes?",
+      answer: "If you exceed your monthly minutes, you'll be billed for the additional usage at your current rate. We'll notify you when you're approaching your limit."
+    },
+    {
+      question: "Do you offer custom pricing?",
+      answer: "Yes, we offer custom pricing for enterprise clients with specific needs. Contact our sales team to discuss your requirements."
+    }
+  ];
+
+  return (
+    <>
+      <Head>
+        <title>Pricing - FlyProx AI</title>
+        <meta name="description" content="Transparent pricing for AI voice agents. Choose the plan that fits your business needs." />
+      </Head>
+
+      <div className="min-h-screen bg-black text-white">
+        {/* Header */}
+        <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                  <span className="text-black font-bold text-sm">FP</span>
+                </div>
+                <span className="text-xl font-bold text-white">FlyProx</span>
+                <span className="text-xl font-bold text-yellow-400">AI</span>
+              </div>
+              <nav className="hidden md:flex space-x-8">
+                <a href="/" className="text-gray-300 hover:text-yellow-400 transition-colors">Home</a>
+                <a href="/pricing" className="text-yellow-400 font-semibold">Pricing</a>
+                <a href="/help-center" className="text-gray-300 hover:text-yellow-400 transition-colors">Help Center</a>
+                <a href="/sign-in" className="px-4 py-2 border border-yellow-400 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all">Sign In</a>
+              </nav>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="pt-32 pb-20 px-4">
+          <div className="max-w-7xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              Scale Your Team Without<span className="block bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent"> the Overhead</span>
+            </h1>
+            <p className="text-xl text-gray-400 mb-16 max-w-3xl mx-auto">
+              Transparent pricing for AI voice agents that handle your sales and support 24/7. No hidden fees, just results.
+            </p>
+          </div>
+        </section>
+
+        {/* Usage Calculator */}
+        <section className="py-20 px-4 bg-gray-900">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+              Monthly Call Minutes
+            </h2>
+
+            <div className="bg-black rounded-2xl p-8 border border-gray-800">
+              <div className="mb-8">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-lg text-gray-300">Select Monthly Minutes</span>
+                  <span className="text-3xl font-bold text-yellow-400">{callMinutes.toLocaleString()}</span>
+                </div>
+
+                <input
+                  type="range"
+                  min="1000"
+                  max="50000"
+                  step="500"
+                  value={callMinutes}
+                  onChange={(e) => setCallMinutes(parseInt(e.target.value))}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+                  style={{
+                    background: `linear-gradient(to right, rgb(250, 204, 21) 0%, rgb(250, 204, 21) ${((callMinutes - 1000) / 49000) * 100}%, rgb(55, 65, 81) ${((callMinutes - 1000) / 49000) * 100}%, rgb(55, 65, 81) 100%)`
+                  }}
+                />
+
+                <div className="flex justify-between text-sm text-gray-500 mt-2">
+                  <span>1,000</span>
+                  <span>50,000+</span>
+                </div>
+              </div>
+
+              <div className="text-center py-8 border-t border-gray-800">
+                <div className="text-4xl md:text-5xl font-bold mb-2">
+                  <span className="text-white">${monthlyPrice.toLocaleString()}</span>
+                  <span className="text-xl text-gray-400">/month</span>
+                </div>
+                <p className="text-gray-400">
+                  {callMinutes >= 50000 ? (
+                    <>
+                      For volumes exceeding 50k minutes,{' '}
+                      <a href="mailto:sales@flyprox.com" className="text-yellow-400 hover:text-yellow-300 underline">contact sales</a>
+                    </>
+                  ) : (
+                    `Starting at $350 for the first 1,000 minutes`
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Tiers */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
+              {implementationTiers.map((tier) => (
+                <button
+                  key={tier.minutes}
+                  onClick={() => setCallMinutes(tier.minutes)}
+                  className={`p-4 rounded-lg border transition-all ${
+                    callMinutes === tier.minutes
+                      ? 'border-yellow-500 bg-yellow-500/10'
+                      : 'border-gray-700 hover:border-gray-600'
+                  }`}
+                >
+                  <div className="text-sm text-gray-400">{tier.minutes.toLocaleString()} min</div>
+                  <div className="text-lg font-bold text-white">${tier.price}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Implementation Plans */}
+        <section className="py-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                One-Time Implementation Fee
+              </h2>
+              <p className="text-xl text-gray-400">
+                Choose the implementation plan that fits your needs
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {pricingPlans.map((plan) => (
+                <div
+                  key={plan.id}
+                  className={`relative rounded-2xl p-8 transition-all duration-300 ${
+                    plan.popular
+                      ? 'bg-gradient-to-b from-yellow-500/10 to-gray-900 border-2 border-yellow-500 shadow-lg shadow-yellow-500/20 transform scale-105'
+                      : selectedPlan === plan.id
+                      ? 'bg-gray-900 border-2 border-yellow-500'
+                      : 'bg-gray-900 border border-gray-800 hover:border-gray-600'
+                  }`}
+                  onClick={() => setSelectedPlan(plan.id)}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-4 py-1 rounded-full text-sm font-bold">
+                        Most Popular
+                      </span>
+                    </div>
+                  )}
+
+                  <h3 className="text-2xl font-bold mb-2 text-white">{plan.name}</h3>
+                  <p className="text-gray-400 mb-6">{plan.description}</p>
+
+                  <div className="mb-8">
+                    <span className="text-4xl md:text-5xl font-bold text-white">{plan.price}</span>
+                    {plan.period && (
+                      <span className="text-gray-400 ml-2">{plan.period}</span>
+                    )}
+                  </div>
+
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <svg className="w-5 h-5 text-yellow-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-300 text-sm">{feature}</span>
+                      </li>
+                    ))}
+                    {plan.excludedFeatures.map((feature, index) => (
+                      <li key={index} className="flex items-start opacity-50">
+                        <svg className="w-5 h-5 text-gray-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-500 text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    className={`w-full py-3 rounded-lg font-semibold transition-all ${
+                      plan.popular
+                        ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700'
+                        : 'border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black'
+                    }`}
+                  >
+                    {plan.buttonText}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 px-4 bg-gray-900">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Got Questions? Let's Talk AI
+              </h2>
+              <p className="text-xl text-gray-400">
+                Everything you need to know about our pricing
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <div key={index} className="bg-black rounded-lg border border-gray-800 overflow-hidden">
+                  <button
+                    onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
+                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-900 transition-colors"
+                  >
+                    <h3 className="text-lg font-semibold text-white">
+                      {faq.question}
+                    </h3>
+                    <svg
+                      className={`w-5 h-5 text-yellow-400 transform transition-transform duration-200 ${
+                        openFAQ === index ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  {openFAQ === index && (
+                    <div className="px-6 pb-4 border-t border-gray-800">
+                      <p className="text-gray-400 pt-4">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="py-12 px-4 bg-gray-900 border-t border-gray-800">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-4 gap-8">
+              <div>
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                    <span className="text-black font-bold text-sm">FP</span>
+                  </div>
+                  <span className="text-xl font-bold text-white">FlyProx</span>
+                  <span className="text-xl font-bold text-yellow-400">AI</span>
+                </div>
+                <p className="text-gray-400 text-sm">
+                  AI-powered voice agents for modern businesses.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-white mb-4">Product</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><a href="/pricing" className="hover:text-yellow-400">Pricing</a></li>
+                  <li><a href="/sign-in" className="hover:text-yellow-400">Sign In</a></li>
+                  <li><a href="#demo" className="hover:text-yellow-400">Demo</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-white mb-4">Company</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><a href="/" className="hover:text-yellow-400">About</a></li>
+                  <li><a href="/help-center" className="hover:text-yellow-400">Help Center</a></li>
+                  <li><a href="#contact" className="hover:text-yellow-400">Contact</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-white mb-4">Contact</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li><a href="mailto:hello@flyprox.com" className="hover:text-yellow-400">hello@flyprox.com</a></li>
+                  <li><a href="tel:+1234567890" className="hover:text-yellow-400">+1 (234) 567-890</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+              <p>&copy; 2024 FlyProx AI. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+      <style jsx>{`
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          width: 24px;
+          height: 24px;
+          background: rgb(250, 204, 21);
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        }
+        .slider::-moz-range-thumb {
+          width: 24px;
+          height: 24px;
+          background: rgb(250, 204, 21);
+          border-radius: 50%;
+          cursor: pointer;
+          border: none;
+          box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
+        }
+      `}</style>
+    </>
+  );
+}
