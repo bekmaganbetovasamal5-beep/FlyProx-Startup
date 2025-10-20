@@ -60,6 +60,14 @@ export default function HelpCenter() {
         {
           q: "How long does implementation take?",
           a: "Basic setup can be done in 1-2 weeks. Business plans typically take 2-4 weeks, and Premium plans vary based on complexity."
+        },
+        {
+          q: "Do I need technical knowledge?",
+          a: "No technical knowledge required for Basic and Business plans. Our team handles all technical setup. Premium plans include comprehensive support."
+        },
+        {
+          q: "Can I customize the AI voice?",
+          a: "Yes! All plans include some level of voice customization. Business and Premium plans include custom voice training for your brand."
         }
       ]
     },
@@ -78,6 +86,14 @@ export default function HelpCenter() {
         {
           q: "What happens if I exceed my minutes?",
           a: "If you exceed your monthly minutes, you'll be billed for the additional usage at your current rate. We'll notify you when you're approaching your limit."
+        },
+        {
+          q: "Is there a free trial available?",
+          a: "We offer a 14-day free trial for Business plans. Contact our sales team to start your trial."
+        },
+        {
+          q: "What payment methods do you accept?",
+          a: "We accept all major credit cards, PayPal, and wire transfers for Enterprise accounts."
         }
       ]
     },
@@ -96,6 +112,40 @@ export default function HelpCenter() {
         {
           q: "Can I customize the AI responses?",
           a: "Yes, all plans include some level of customization. Business and Premium plans include custom AI training and conversation flow design."
+        },
+        {
+          q: "What languages are supported?",
+          a: "We support 100+ languages including English, Spanish, French, German, Chinese, Japanese, and many more."
+        },
+        {
+          q: "Is my data secure?",
+          a: "Absolutely. We use bank-level encryption and are fully compliant with GDPR, HIPAA, and SOC 2 standards."
+        }
+      ]
+    },
+    {
+      name: "Features & Usage",
+      icon: "⚡",
+      questions: [
+        {
+          q: "How many calls can AI agents handle simultaneously?",
+          a: "There's no limit to concurrent calls. Our AI agents can handle unlimited simultaneous conversations based on your plan's minute allowance."
+        },
+        {
+          q: "Can AI agents handle complex conversations?",
+          a: "Yes, our AI can understand context, handle multi-turn conversations, and manage complex customer queries with human-like empathy."
+        },
+        {
+          q: "Can I monitor AI agent performance?",
+          a: "All plans include a dashboard to monitor performance, call recordings (where compliant), sentiment analysis, and conversation analytics."
+        },
+        {
+          q: "Can AI agents make outbound calls?",
+          a: "Yes, Business and Premium plans support outbound calling for follow-ups, appointment reminders, and proactive customer outreach."
+        },
+        {
+          q: "What happens during system updates?",
+          a: "Updates are seamless with zero downtime. Your AI agents continue operating normally during maintenance and updates."
         }
       ]
     }
@@ -136,27 +186,6 @@ export default function HelpCenter() {
       </Head>
 
       <div className="min-h-screen bg-black text-white">
-        {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                  <span className="text-black font-bold text-sm">FP</span>
-                </div>
-                <span className="text-xl font-bold text-white">FlyProx</span>
-                <span className="text-xl font-bold text-yellow-400">AI</span>
-              </div>
-              <nav className="hidden md:flex space-x-8">
-                <a href="/" className="text-gray-300 hover:text-yellow-400 transition-colors">Home</a>
-                <a href="/pricing" className="text-gray-300 hover:text-yellow-400 transition-colors">Pricing</a>
-                <a href="/help-center" className="text-yellow-400 font-semibold">Help Center</a>
-                <a href="/sign-in" className="px-4 py-2 border border-yellow-400 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all">Sign In</a>
-              </nav>
-            </div>
-          </div>
-        </header>
-
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -211,7 +240,7 @@ export default function HelpCenter() {
               Frequently Asked <span className="text-yellow-400">Questions</span>
             </h2>
 
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-2 gap-8">
               {faqCategories.map((category, catIndex) => (
                 <div key={catIndex} className="bg-gray-900 rounded-xl p-6 border border-gray-800">
                   <div className="flex items-center mb-6">
@@ -401,56 +430,6 @@ export default function HelpCenter() {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="py-12 px-4 bg-gray-900 border-t border-gray-800">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-4 gap-8">
-              <div>
-                <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                    <span className="text-black font-bold text-sm">FP</span>
-                  </div>
-                  <span className="text-xl font-bold text-white">FlyProx</span>
-                  <span className="text-xl font-bold text-yellow-400">AI</span>
-                </div>
-                <p className="text-gray-400 text-sm">
-                  AI-powered voice agents for modern businesses.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-white mb-4">Product</h4>
-                <ul className="space-y-2 text-gray-400 text-sm">
-                  <li><a href="/pricing" className="hover:text-yellow-400">Pricing</a></li>
-                  <li><a href="/sign-in" className="hover:text-yellow-400">Sign In</a></li>
-                  <li><a href="#demo" className="hover:text-yellow-400">Demo</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-white mb-4">Company</h4>
-                <ul className="space-y-2 text-gray-400 text-sm">
-                  <li><a href="/" className="hover:text-yellow-400">About</a></li>
-                  <li><a href="/help-center" className="hover:text-yellow-400">Help Center</a></li>
-                  <li><a href="#contact" className="hover:text-yellow-400">Contact</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-white mb-4">Contact</h4>
-                <ul className="space-y-2 text-gray-400 text-sm">
-                  <li><a href="mailto:hello@flyprox.com" className="hover:text-yellow-400">hello@flyprox.com</a></li>
-                  <li><a href="tel:+1234567890" className="hover:text-yellow-400">+1 (234) 567-890</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-              <p>&copy; 2024 FlyProx AI. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   );

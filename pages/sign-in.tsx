@@ -1,28 +1,45 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { useState } from 'react';
 
 export default function SignIn() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [company, setCompany] = useState('');
+  const [companySize, setCompanySize] = useState('');
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [agreeToMarketing, setAgreeToMarketing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     setIsLoading(true);
 
-    // Simulate authentication
+    // Validation
+    if (!firstName || !lastName || !email || !password || !phoneNumber || !company || !companySize) {
+      setError('Please fill in all required fields');
+      setIsLoading(false);
+      return;
+    }
+
+    if (!agreeToTerms) {
+      setError('You must agree to the Terms of Service and Privacy Policy');
+      setIsLoading(false);
+      return;
+    }
+
+    // Simulate registration/sign in
     setTimeout(() => {
       alert('This is a demo. In production, you would be redirected to your dashboard.');
+      localStorage.setItem('authToken', 'demo-token');
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userName', `${firstName} ${lastName}`);
+      localStorage.setItem('userCompany', company);
       setIsLoading(false);
     }, 1500);
   };
@@ -34,7 +51,7 @@ export default function SignIn() {
         <meta name="description" content="Sign in to your FlyProx AI account" />
       </Head>
 
-      <div className="min-h-screen flex items-start justify-center bg-black pt-24">
+      <div className="min-h-screen flex items-start justify-center pt-24" style={{ backgroundColor: '#0a0c10' }}>
         {/* Background gradient effects */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-transparent to-gray-900"></div>
@@ -57,48 +74,112 @@ export default function SignIn() {
 
             {/* Sign In Title */}
             <h2 className="text-3xl font-bold text-center text-white mb-2">
-              Welcome Back
+               Welcome
             </h2>
             <p className="text-center text-gray-400 mb-6">
-              Sign in to access your account
+              Enter your details to access your account
             </p>
 
-            {/* Sign In Form */}
+            {/* Error Message */}
+            {error && (
+              <div className="mb-6 p-3 bg-red-500/10 border border-red-500/50 rounded-lg">
+                <p className="text-red-400 text-sm text-center">{error}</p>
+              </div>
+            )}
+
+            {/* Sign Up Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Name Fields */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
+                    First Name <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                    placeholder="John"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-2">
+                    Last Name <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                    placeholder="Doe"
+                    required
+                  />
+                </div>
+              </div>
+
               {/* Email Field */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                  Email Address
+                  Email <span className="text-red-400">*</span>
                 </label>
                 <input
                   id="email"
-                  name="email"
                   type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
                   placeholder="name@example.com"
+                  required
                   autoComplete="email"
                 />
+              </div>
+
+              {/* Phone Field */}
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                  Phone Number <span className="text-red-400">*</span>
+                </label>
+                <div className="flex">
+                  <select className="px-3 py-3 bg-gray-800 border border-gray-700 rounded-l-lg text-white focus:outline-none focus:border-yellow-400 transition-colors">
+                    <option>+1</option>
+                    <option>+44</option>
+                    <option>+7</option>
+                    <option>+49</option>
+                    <option>+33</option>
+                    <option>+81</option>
+                    <option>+86</option>
+                  </select>
+                  <input
+                    id="phone"
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    className="flex-1 px-4 py-3 bg-gray-800 border-t border-b border-r border-gray-700 rounded-r-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                    placeholder="(555) 123-4567"
+                    required
+                  />
+                </div>
               </div>
 
               {/* Password Field */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
-                  Password
+                  Password <span className="text-red-400">*</span>
                 </label>
                 <div className="relative">
                   <input
                     id="password"
-                    name="password"
                     type={showPassword ? 'text' : 'password'}
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors pr-12"
                     placeholder="••••••••••"
-                    autoComplete="current-password"
+                    required
+                    autoComplete="new-password"
                   />
                   <button
                     type="button"
@@ -119,23 +200,72 @@ export default function SignIn() {
                 </div>
               </div>
 
-              {/* Remember me & Forgot password */}
-              <div className="flex items-center justify-between">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
-                  />
-                  <span className="ml-2 text-sm text-gray-300">
-                    Remember me
-                  </span>
+              {/* Company Field */}
+              <div>
+                <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
+                  Company <span className="text-red-400">*</span>
                 </label>
-                <a href="#" className="text-sm text-yellow-400 hover:text-yellow-300">
-                  Forgot password?
-                </a>
+                <input
+                  id="company"
+                  type="text"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                  placeholder="Acme Inc."
+                  required
+                />
               </div>
 
-              {/* Sign In Button */}
+              {/* Company Size Field */}
+              <div>
+                <label htmlFor="companySize" className="block text-sm font-medium text-gray-300 mb-2">
+                  Company Size <span className="text-red-400">*</span>
+                </label>
+                <select
+                  id="companySize"
+                  value={companySize}
+                  onChange={(e) => setCompanySize(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-yellow-400 transition-colors"
+                  required
+                >
+                  <option value="">Select company size</option>
+                  <option value="1-10">1-10 employees</option>
+                  <option value="11-50">11-50 employees</option>
+                  <option value="51-200">51-200 employees</option>
+                  <option value="201-500">201-500 employees</option>
+                  <option value="501-1000">501-1000 employees</option>
+                  <option value="1000+">1000+ employees</option>
+                </select>
+              </div>
+
+              {/* Terms and Marketing Checkboxes */}
+              <div className="space-y-3 pt-2">
+                <label className="flex items-start">
+                  <input
+                    type="checkbox"
+                    checked={agreeToTerms}
+                    onChange={(e) => setAgreeToTerms(e.target.checked)}
+                    className="mt-1 h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                  />
+                  <span className="ml-2 text-sm text-gray-300">
+                    I agree to the <a href="#" className="text-yellow-400 hover:text-yellow-300">Terms of Service</a> and <a href="#" className="text-yellow-400 hover:text-yellow-300">Privacy Policy</a> <span className="text-red-400">*</span>
+                  </span>
+                </label>
+
+                <label className="flex items-start">
+                  <input
+                    type="checkbox"
+                    checked={agreeToMarketing}
+                    onChange={(e) => setAgreeToMarketing(e.target.checked)}
+                    className="mt-1 h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                  />
+                  <span className="ml-2 text-sm text-gray-300">
+                    I agree to receive marketing communications from FlyProx
+                  </span>
+                </label>
+              </div>
+
+              {/* Sign Up Button */}
               <button
                 type="submit"
                 disabled={isLoading}
@@ -144,57 +274,17 @@ export default function SignIn() {
                 {isLoading ? (
                   <span className="flex items-center justify-center">
                     <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018 0 8 8 0 00-8z"></path>
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018 0 8 8 0 00-8z" />
                     </svg>
-                    Signing In...
+                    Creating Account...
                   </span>
                 ) : (
-                  'Sign In'
+                  'Get Started'
                 )}
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="relative my-8">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-gray-900 text-gray-400">New to FlyProx?</span>
-              </div>
-            </div>
-
-            {/* Sign Up Link */}
-            <div className="text-center">
-              <p className="text-gray-400 mb-4">Don't have an account yet?</p>
-              <a
-                href="/pricing"
-                className="inline-block px-6 py-3 border border-yellow-400 text-yellow-400 font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300"
-              >
-                Get Started
-              </a>
-            </div>
-
-            {/* Demo Notice */}
-            <div className="mt-8 p-4 bg-yellow-400/10 border border-yellow-400/30 rounded-lg">
-              <p className="text-sm text-yellow-400 text-center">
-                <strong>Demo Mode:</strong> Use any email and password to sign in
-              </p>
-            </div>
-          </div>
-
-          {/* Back to Home */}
-          <div className="text-center mt-8">
-            <a
-              href="/"
-              className="text-gray-400 hover:text-yellow-400 transition-colors inline-flex items-center"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Back to Home
-            </a>
           </div>
         </div>
 
