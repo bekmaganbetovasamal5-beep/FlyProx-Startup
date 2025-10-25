@@ -1,19 +1,6 @@
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
 export default function SignIn() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [company, setCompany] = useState('');
-  const [companySize, setCompanySize] = useState('');
-  const [agreeToTerms, setAgreeToTerms] = useState(false);
-  const [agreeToMarketing, setAgreeToMarketing] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

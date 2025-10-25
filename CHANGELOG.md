@@ -2,6 +2,57 @@
 
 Формирование изменений в проекте FlyProx. Сюда бдуешь добавлять изменения в проекте
 
+## [1.2.13] - 2025-01-26 22:45
+### Added
+- Создана B2B outbound sales landing page с английским контентом
+- Обновлен Hero компонент с акцентом на 32% увеличение meetings
+- Создан Problems компонент с 3 основными B2B sales проблемами
+- Обновлен Features компонент с AI automation преимуществами
+- Использованы MCP серверы: sequential-thinking, context7, firecrawl для анализа
+
+### Changed
+- Hero.tsx: English B2B-focused copy with "Increase Your Sales Meetings by 32%"
+- Problems.tsx: 3 ключевые проблемы outbound sales (Low Conversion, Poor Personalization, Scaling)
+- Features.tsx: AI-powered features для outbound sales (Prospecting, Qualification, Scheduling)
+- Весь контент переведен на английский язык для международного рынка
+
+### Reason
+- Запрос на создание B2B outbound sales landing page для GitHub Pages
+- Использование MCP серверов для глубокого анализа рынка и конкурентов
+- Сохранение существующей функциональности при добавлении нового контента
+
+### Technical Details
+- Использован sequential-thinking MCP для анализа B2B sales challenges
+- Использован context7 MCP для исследования трендов и best practices
+- Использован firecrawl MCP для анализа competitor landing pages
+- Все компоненты сохраняют существующую функциональность
+- Оптимизировано для статического экспорта на GitHub Pages
+- MCP серверы активны и работают: Playwright, Sequential-thinking, Supabase, Context7, Filesystem
+
+## [1.2.12] - 2025-01-26 14:45
+### Added
+- Полная настройка и запуск Docker инфраструктуры проекта
+- Активированы все MCP сервера из файла mcp.json
+- Настроена работа на портах: Backend 3000, Frontend 3001, PostgreSQL 5432, Redis 6380
+
+### Fixed
+- Освобождены порты 3000, 3001, 5432, 6380 от предыдущих процессов
+- Настроена корректная работа docker-compose.yml
+- Проверена доступность всех сервисов
+
+### Reason
+- Запуск проекта на чистой Docker инфраструктуре
+- Обеспечение корректной работы всех компонентов системы
+- Активация MCP интеграций для полноценной разработки
+
+### Technical Details
+- docker-compose.yml: запущены контейнеры backend, postgres, redis
+- Frontend запущен отдельно через PORT=3001 npm run dev
+- PostgreSQL 17.6 работает на порту 5432 с базой данных mydb
+- Redis 8.2.2 работает на порту 6380
+- Backend Express доступен на порту 3000
+- Все MCP сервера активны: Playwright, Sequential-thinking, Supabase, Context7, Filesystem, Git и др.
+
 ## [1.2.11] - 2025-01-18 13:35
 ### Fixed
 - Исправлена навигация кнопки "Products" в Header компоненте

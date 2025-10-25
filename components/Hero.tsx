@@ -20,16 +20,15 @@ export default function Hero() {
         {/* Main heading */}
         <h1 className="text-5xl md:text-7xl font-bold mb-12">
           <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
-            AI Voice Agents
+            Increase Your Sales Meetings by 32%
           </span>
           <br />
-          <span className="text-white">for Sales & Support</span>
+          <span className="text-white">with AI-Powered Outbound Sales</span>
         </h1>
 
         {/* Subheading */}
         <p className="text-xl md:text-2xl text-gray-400 mb-20 max-w-4xl mx-auto leading-relaxed">
-          Transform your customer interactions with intelligent AI agents that handle
-          sales calls, support tickets, and lead qualification 24/7.
+          FlyProx AI automates cold calls, qualifies leads, and personalizes scripts in real-time - converting every conversation into a booked meeting
         </p>
 
         {/* CTA Buttons */}
@@ -38,16 +37,16 @@ export default function Hero() {
             href="/sign-in"
             className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-bold rounded-lg hover:from-yellow-500 hover:to-yellow-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-yellow-500/25 inline-block text-center"
           >
-            Get Started
+            Book a Demo
           </a>
           <a
-            href="/sign-in"
+            href="#demo-video"
             className="px-8 py-4 border border-yellow-400 text-yellow-400 font-semibold rounded-lg hover:bg-yellow-400 hover:text-black transition-all duration-300 flex items-center justify-center"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m-6-8h6a2 2 0 012 2v8a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z" />
             </svg>
-            Sign In
+            Watch AI in Action
           </a>
         </div>
 

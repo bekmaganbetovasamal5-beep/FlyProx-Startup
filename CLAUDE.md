@@ -1,3 +1,10 @@
+ВАЖНО У МЕНЯ САЙТ НА Github pages поэтому делай архитектуру и работу чтобы она там хорошо покзаывался 
+
+
+Используй sequential thiniking mcp, context 7 mcp, firewcrawl mcp всегда
+
+используй библиотеку shad cn ui  для ui 
+
 Everytime read instructions from file 
 NOTES.md
 API_DOCS.md , ARCHITECTURE.md , CHANGELOG.md ,CONTRIBUTING.md, DEPLOYMENT.md NOTES.md openapi.yaml SUMMARY.md TODO.md
@@ -7,14 +14,13 @@ API_DOCS.md , ARCHITECTURE.md , CHANGELOG.md ,CONTRIBUTING.md, DEPLOYMENT.md NOT
    - Дата и время
    - Что изменено
    - Причина изменения
-   
-2. Обнови файл summary.md с текущим состоянием проекта
+
 
 Файлы находятся в корне проекта:
 
 Architecture
-Supabase OAuth
-Frontend (Next.js + Tailwind CSS + Supabase Auth)
+
+Frontend (Next.js + Tailwind CSS + 
 Express API (Routes → Controllers → Services)
 PostgreSQL 
 ↓
