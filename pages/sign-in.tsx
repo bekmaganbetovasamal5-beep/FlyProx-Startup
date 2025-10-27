@@ -3,17 +3,61 @@ import Head from 'next/head';
 
 export default function SignIn() {
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [company, setCompany] = useState('');
   const [companySize, setCompanySize] = useState('');
+  const [conversionInterest, setConversionInterest] = useState('');
+  const [revenueRange, setRevenueRange] = useState('');
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [agreeToMarketing, setAgreeToMarketing] = useState(false);
+  const [willingToPay, setWillingToPay] = useState('');
+  const [wouldBuyAt1200, setWouldBuyAt1200] = useState('');
+  const [fairPriceFor1000Calls, setFairPriceFor1000Calls] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+
+  // Save all form data to localStorage for easy access
+  const saveFormData = () => {
+    const formData = {
+      timestamp: new Date().toISOString(),
+      firstName,
+      email,
+      companySize,
+      willingToPay,
+      wouldBuyAt1200,
+      fairPriceFor1000Calls,
+      agreeToTerms,
+      agreeToMarketing,
+      userAgent: navigator.userAgent,
+      page: 'sign-in'
+    };
+
+    localStorage.setItem('flyproxFormData', JSON.stringify(formData));
+
+    // Also save to a separate array for multiple entries
+    const existingData = JSON.parse(localStorage.getItem('flyproxSubmissions') || '[]');
+    existingData.push(formData);
+    localStorage.setItem('flyproxSubmissions', JSON.stringify(existingData));
+
+    console.log('✅ Form data saved:', formData);
+  };
+
+  // Export all saved data to JSON file for easy viewing
+  const exportFormData = () => {
+    const allData = JSON.parse(localStorage.getItem('flyproxSubmissions') || '[]');
+
+    // Create downloadable JSON file
+    const dataStr = JSON.stringify(allData, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    const url = URL.createObjectURL(dataBlob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `flyprox_data_${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+
+    URL.revokeObjectURL(url);
+    console.log('✅ Data exported:', allData.length, 'entries');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +65,7 @@ export default function SignIn() {
     setIsLoading(true);
 
     // Validation
-    if (!firstName || !lastName || !email || !password || !phoneNumber || !company || !companySize) {
+    if (!firstName || !email || !companySize) {
       setError('Please fill in all required fields');
       setIsLoading(false);
       return;
@@ -33,13 +77,16 @@ export default function SignIn() {
       return;
     }
 
+    // Save all form data before submission
+    saveFormData();
+
     // Simulate registration/sign in
     setTimeout(() => {
-      alert('This is a demo. In production, you would be redirected to your dashboard.');
+      // Redirect to thank you page instead of showing alert
+      window.location.href = '/thank-you/';
       localStorage.setItem('authToken', 'demo-token');
       localStorage.setItem('userEmail', email);
-      localStorage.setItem('userName', `${firstName} ${lastName}`);
-      localStorage.setItem('userCompany', company);
+      localStorage.setItem('userName', firstName);
       setIsLoading(false);
     }, 1500);
   };
@@ -80,6 +127,26 @@ export default function SignIn() {
               Enter your details to access your account
             </p>
 
+            {/* Data Management Buttons */}
+            <div className="flex gap-2 mb-4 justify-center">
+              <a
+                href="/view-data.html"
+                target="_blank"
+                className="px-3 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 rounded transition-colors"
+                title="Открыть страницу для просмотра всех данных"
+              >
+                📊 Посмотреть данные
+              </a>
+              <button
+                type="button"
+                onClick={exportFormData}
+                className="px-3 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 rounded transition-colors"
+                title="Скачать все данные в JSON файл"
+              >
+                📥 Экспорт данных
+              </button>
+            </div>
+
             {/* Error Message */}
             {error && (
               <div className="mb-6 p-3 bg-red-500/10 border border-red-500/50 rounded-lg">
@@ -89,36 +156,20 @@ export default function SignIn() {
 
             {/* Sign Up Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Name Fields */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
-                    First Name <span className="text-red-400">*</span>
-                  </label>
-                  <input
-                    id="firstName"
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
-                    placeholder="John"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-300 mb-2">
-                    Last Name <span className="text-red-400">*</span>
-                  </label>
-                  <input
-                    id="lastName"
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
-                    placeholder="Doe"
-                    required
-                  />
-                </div>
+              {/* First Name Field */}
+              <div>
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-300 mb-2">
+                  First Name <span className="text-red-400">*</span>
+                </label>
+                <input
+                  id="firstName"
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
+                  placeholder="John"
+                  required
+                />
               </div>
 
               {/* Email Field */}
@@ -138,84 +189,7 @@ export default function SignIn() {
                 />
               </div>
 
-              {/* Phone Field */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                  Phone Number <span className="text-red-400">*</span>
-                </label>
-                <div className="flex">
-                  <select className="px-3 py-3 bg-gray-800 border border-gray-700 rounded-l-lg text-white focus:outline-none focus:border-yellow-400 transition-colors">
-                    <option>+1</option>
-                    <option>+44</option>
-                    <option>+7</option>
-                    <option>+49</option>
-                    <option>+33</option>
-                    <option>+81</option>
-                    <option>+86</option>
-                  </select>
-                  <input
-                    id="phone"
-                    type="tel"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="flex-1 px-4 py-3 bg-gray-800 border-t border-b border-r border-gray-700 rounded-r-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
-                    placeholder="(555) 123-4567"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Password Field */}
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
-                  Password <span className="text-red-400">*</span>
-                </label>
-                <div className="relative">
-                  <input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors pr-12"
-                    placeholder="••••••••••"
-                    required
-                    autoComplete="new-password"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
-                  >
-                    {showPassword ? (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    ) : (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Company Field */}
-              <div>
-                <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
-                  Company <span className="text-red-400">*</span>
-                </label>
-                <input
-                  id="company"
-                  type="text"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 transition-colors"
-                  placeholder="Acme Inc."
-                  required
-                />
-              </div>
-
+  
               {/* Company Size Field */}
               <div>
                 <label htmlFor="companySize" className="block text-sm font-medium text-gray-300 mb-2">
@@ -236,6 +210,94 @@ export default function SignIn() {
                   <option value="501-1000">501-1000 employees</option>
                   <option value="1000+">1000+ employees</option>
                 </select>
+              </div>
+
+              {/* Pricing Survey Questions */}
+              <div className="space-y-4 pt-4 border-t border-gray-800">
+                <h3 className="text-lg font-semibold text-white mb-4">Pricing Survey</h3>
+
+                {/* Question 1: Willingness to Pay */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
+                    How much are you willing to pay for a service that increases booked meetings by 32%?
+                  </label>
+                  <div className="space-y-2">
+                    {[
+                      { value: '$0-500/month', label: '$0-500/month' },
+                      { value: '$500-1,000/month', label: '$500-1,000/month' },
+                      { value: '$1,000-2,500/month', label: '$1,000-2,500/month' },
+                      { value: '$2,500-5,000/month', label: '$2,500-5,000/month' },
+                      { value: '$5,000+/month', label: '$5,000+/month' }
+                    ].map((option) => (
+                      <label key={option.value} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="willingToPay"
+                          value={option.value}
+                          checked={willingToPay === option.value}
+                          onChange={(e) => setWillingToPay(e.target.value)}
+                          className="h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                        />
+                        <span className="ml-2 text-sm text-gray-300">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Question 2: Purchase Decision at $1,200 */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
+                    If FlyProx AI cost $1,200/month and made 500 calls with 32% conversion, would you buy?
+                  </label>
+                  <div className="space-y-2">
+                    {[
+                      { value: 'yes-buy-now', label: 'Yes, I would buy now' },
+                      { value: 'yes-with-trial', label: 'Yes, but I need a trial version' },
+                      { value: 'maybe-depends', label: 'Maybe, depends on results' },
+                      { value: 'too-expensive', label: 'Too expensive' },
+                      { value: 'not-interested', label: 'Not interested' }
+                    ].map((option) => (
+                      <label key={option.value} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="wouldBuyAt1200"
+                          value={option.value}
+                          checked={wouldBuyAt1200 === option.value}
+                          onChange={(e) => setWouldBuyAt1200(e.target.value)}
+                          className="h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                        />
+                        <span className="ml-2 text-sm text-gray-300">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Question 3: Fair Price for 1000 Calls */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
+                    What price seems fair for 1000 AI calls with full analytics?
+                  </label>
+                  <div className="space-y-2">
+                    {[
+                      { value: '$200-500', label: '$200-500' },
+                      { value: '$500-1,000', label: '$500-1,000' },
+                      { value: '$1,000-2,000', label: '$1,000-2,000' },
+                      { value: '$2,000+', label: '$2,000+' }
+                    ].map((option) => (
+                      <label key={option.value} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="fairPriceFor1000Calls"
+                          value={option.value}
+                          checked={fairPriceFor1000Calls === option.value}
+                          onChange={(e) => setFairPriceFor1000Calls(e.target.value)}
+                          className="h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                        />
+                        <span className="ml-2 text-sm text-gray-300">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* Terms and Marketing Checkboxes */}
