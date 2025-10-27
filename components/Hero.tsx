@@ -18,18 +18,17 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
         {/* Main heading */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-12">
-          <span className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent">
-            AI Voice Agents
+        <h1 className="text-4xl md:text-6xl font-bold mb-12">
+          <span className="text-white">
+            FlyProx AI makes outbound sales calls for B2B companies
           </span>
-          <br />
-          <span className="text-white">for Sales & Support</span>
         </h1>
 
         {/* Subheading */}
         <p className="text-xl md:text-2xl text-gray-400 mb-20 max-w-4xl mx-auto leading-relaxed">
-          Transform your customer interactions with intelligent AI agents that handle
-          sales calls, support tickets, and lead qualification 24/7.
+          For example, when a SaaS company needs to book 50 demos this month,
+          our AI calls 500 prospects, qualifies them, and books meetings automatically —
+          charging $99/month instead of $5,000 for a sales rep.
         </p>
 
         {/* CTA Buttons */}

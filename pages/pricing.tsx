@@ -2,35 +2,34 @@ import Head from 'next/head';
 import React, { useState } from 'react';
 
 export default function Pricing() {
-  const [callMinutes, setCallMinutes] = useState(5000);
-  const [selectedPlan, setSelectedPlan] = useState('business');
+  const [callMinutes, setCallMinutes] = useState(500);
+  const [selectedPlan, setSelectedPlan] = useState('professional');
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   // Calculate monthly pricing based on call minutes
   const calculatePrice = (minutes) => {
-    const basePrice = 350; // Base price for 1000 minutes
-    const pricePerMinute = 0.35; // $0.35 per minute
-    return Math.round(basePrice + (minutes * pricePerMinute));
+    const pricePerMinute = 0.20; // $0.20 per minute
+    return Math.round(minutes * pricePerMinute);
   };
 
   const monthlyPrice = calculatePrice(callMinutes);
 
   const pricingPlans = [
     {
-      id: 'basic',
-      name: 'Basic',
-      price: '$3,000',
-      period: 'one-time',
+      id: 'starter',
+      name: 'Starter',
+      price: '$99',
+      period: '/month',
       description: 'Perfect for small businesses getting started with AI voice agents',
       features: [
-        'Self-guided implementation',
-        'You own all setup and configuration',
-        'Up to 3 months post-launch monitoring',
-        'Basic support structure',
-        'Up to 2 AI voice agents',
-        'Email support during business hours',
+        '495 minutes included ($0.20/min)',
+        '20 minutes free trial',
+        '1 AI voice agent',
         'Basic analytics dashboard',
-        'Standard voice quality'
+        'Email support during business hours',
+        'Standard voice quality',
+        'Basic integrations',
+        '$0.20 per additional minute'
       ],
       excludedFeatures: [
         'Custom AI training',
@@ -42,50 +41,49 @@ export default function Pricing() {
       popular: false
     },
     {
-      id: 'business',
-      name: 'Business',
-      price: '$6,000',
-      period: 'one-time',
-      description: 'Ideal for growing teams that need assisted implementation',
+      id: 'professional',
+      name: 'Professional',
+      price: '$199',
+      period: '/month',
+      description: 'Ideal for growing teams that need more minutes',
       features: [
-        'Assisted implementation by FlyProxAI team',
-        'We help configure 1 AI agent',
-        'Life of contract monitoring',
-        'Monthly check-ins with Customer Success Manager',
-        'Monthly webinars and success reports',
-        'Up to 5 AI voice agents',
-        'Priority email & chat support',
+        '995 minutes included ($0.20/min)',
+        '20 minutes free trial',
+        '3 AI voice agents',
         'Advanced analytics dashboard',
-        'Custom voice training',
-        'Basic integrations setup'
+        'Priority email & chat support',
+        'Premium voice quality',
+        'All integrations',
+        'Custom knowledge base',
+        'Call recording',
+        '$0.20 per additional minute'
       ],
       excludedFeatures: [
         'Dedicated account manager',
-        'White-glove service',
+        'Custom voice cloning',
         'Custom AI model development'
       ],
       buttonText: 'Get Started',
       popular: true
     },
     {
-      id: 'premium',
-      name: 'Premium',
-      price: 'Contact Sales',
+      id: 'enterprise',
+      name: 'Enterprise',
+      price: 'Custom',
       period: '',
-      description: 'Fully managed service for enterprises that need comprehensive solutions',
+      description: 'Custom solution for large organizations',
       features: [
-        'Fully managed implementation',
-        'FlyProxAI manages up to 10+ AI agents',
-        'Daily/weekly check-ins with dedicated team',
-        'We own all integrations and data imports',
-        'Custom AI model development',
+        'Custom volume pricing',
+        'Unlimited AI agents',
+        'Custom analytics dashboard',
+        '24/7 dedicated support',
+        'Custom voice cloning',
+        'Advanced integrations',
+        'Custom AI training',
+        'Call recording & transcription',
+        'SLA guarantee',
         'Dedicated account manager',
-        '24/7 phone, email, and chat support',
-        'Enterprise-grade analytics',
-        'Unlimited custom integrations',
-        'White-globe service',
-        'Custom SLAs',
-        'On-premise deployment options'
+        'Custom pricing for high volume'
       ],
       excludedFeatures: [],
       buttonText: 'Contact Sales',
@@ -93,41 +91,45 @@ export default function Pricing() {
     }
   ];
 
-  const implementationTiers = [
+  const usageTiers = [
+    {
+      minutes: 500,
+      price: 99
+    },
     {
       minutes: 1000,
-      price: 700
+      price: 199
+    },
+    {
+      minutes: 1500,
+      price: 299
+    },
+    {
+      minutes: 2000,
+      price: 399
     },
     {
       minutes: 2500,
-      price: 1225
+      price: 499
     },
     {
-      minutes: 5000,
-      price: 1750
-    },
-    {
-      minutes: 10000,
-      price: 3150
-    },
-    {
-      minutes: 25000,
-      price: 6125
-    },
-    {
-      minutes: 50000,
-      price: 10500
+      minutes: 3000,
+      price: 599
     }
   ];
 
   const faqs = [
     {
-      question: "What's included in the one-time implementation fee?",
-      answer: "The implementation fee covers setup, configuration, training, and launch support. The level of service depends on the plan you choose - from self-guided setup to fully managed implementation."
+      question: "How does the $0.20/minute pricing work?",
+      answer: "Each minute your AI agent spends on calls costs just $0.20. Included minutes in your plan are billed upfront, and any additional usage is billed at the same $0.20 rate."
+    },
+    {
+      question: "What's included in the 20 minutes free trial?",
+      answer: "Get 20 minutes absolutely free to test our AI agents. No credit card required, just sign up and start making calls to see how our system works."
     },
     {
       question: "How are monthly call minutes billed?",
-      answer: "Call minutes are billed monthly based on usage. Unused minutes don't roll over, but you can adjust your plan at any time. Overages are billed at the same rate per minute."
+      answer: "Included minutes are billed monthly with your plan. Any additional minutes beyond your plan are billed at $0.20 each. You can upgrade your plan anytime to get more included minutes."
     },
     {
       question: "Can I change my plan later?",
@@ -138,8 +140,8 @@ export default function Pricing() {
       answer: "If you exceed your monthly minutes, you'll be billed for the additional usage at your current rate. We'll notify you when you're approaching your limit."
     },
     {
-      question: "Do you offer custom pricing?",
-      answer: "Yes, we offer custom pricing for enterprise clients with specific needs. Contact our sales team to discuss your requirements."
+      question: "Do you offer custom pricing for high volume?",
+      answer: "Yes, we offer custom pricing for enterprise clients needing 10,000+ minutes per month. Contact our sales team to discuss volume discounts."
     }
   ];
 
@@ -150,45 +152,25 @@ export default function Pricing() {
         <meta name="description" content="Transparent pricing for AI voice agents. Choose the plan that fits your business needs." />
       </Head>
 
-      <div className="min-h-screen bg-black text-white">
-        {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                  <span className="text-black font-bold text-sm">FP</span>
-                </div>
-                <span className="text-xl font-bold text-white">FlyProx</span>
-                <span className="text-xl font-bold text-yellow-400">AI</span>
-              </div>
-              <nav className="hidden md:flex space-x-8">
-                <a href="/" className="text-gray-300 hover:text-yellow-400 transition-colors">Home</a>
-                <a href="/pricing" className="text-yellow-400 font-semibold">Pricing</a>
-                <a href="/help-center" className="text-gray-300 hover:text-yellow-400 transition-colors">Help Center</a>
-                <a href="/sign-in" className="px-4 py-2 border border-yellow-400 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all">Sign In</a>
-              </nav>
-            </div>
-          </div>
-        </header>
+      {/* Main content - Header/Footer handled by _app.tsx */}
 
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4">
           <div className="max-w-7xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Scale Your Team Without<span className="block bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent"> the Overhead</span>
+              Transparent Pricing
             </h1>
-            <p className="text-xl text-gray-400 mb-16 max-w-3xl mx-auto">
-              Transparent pricing for AI voice agents that handle your sales and support 24/7. No hidden fees, just results.
-            </p>
-          </div>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-16">
+              Simple <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">$0.20/minute</span>
+            </h2>
+            </div>
         </section>
 
         {/* Usage Calculator */}
         <section className="py-20 px-4 bg-gray-900">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-              Monthly Call Minutes
+              Calculate Your Monthly Cost
             </h2>
 
             <div className="bg-black rounded-2xl p-8 border border-gray-800">
@@ -200,20 +182,20 @@ export default function Pricing() {
 
                 <input
                   type="range"
-                  min="1000"
-                  max="50000"
-                  step="500"
+                  min="100"
+                  max="3000"
+                  step="50"
                   value={callMinutes}
                   onChange={(e) => setCallMinutes(parseInt(e.target.value))}
                   className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
                   style={{
-                    background: `linear-gradient(to right, rgb(250, 204, 21) 0%, rgb(250, 204, 21) ${((callMinutes - 1000) / 49000) * 100}%, rgb(55, 65, 81) ${((callMinutes - 1000) / 49000) * 100}%, rgb(55, 65, 81) 100%)`
+                    background: `linear-gradient(to right, rgb(250, 204, 21) 0%, rgb(250, 204, 21) ${((callMinutes - 100) / 2900) * 100}%, rgb(55, 65, 81) ${((callMinutes - 100) / 2900) * 100}%, rgb(55, 65, 81) 100%)`
                   }}
                 />
 
                 <div className="flex justify-between text-sm text-gray-500 mt-2">
-                  <span>1,000</span>
-                  <span>50,000+</span>
+                  <span>100</span>
+                  <span>3,000+</span>
                 </div>
               </div>
 
@@ -223,13 +205,13 @@ export default function Pricing() {
                   <span className="text-xl text-gray-400">/month</span>
                 </div>
                 <p className="text-gray-400">
-                  {callMinutes >= 50000 ? (
+                  {callMinutes >= 3000 ? (
                     <>
-                      For volumes exceeding 50k minutes,{' '}
+                      For volumes exceeding 3k minutes,{' '}
                       <a href="mailto:sales@flyprox.com" className="text-yellow-400 hover:text-yellow-300 underline">contact sales</a>
                     </>
                   ) : (
-                    `Starting at $350 for the first 1,000 minutes`
+                    `Just $0.20 per minute with 20 minutes free trial`
                   )}
                 </p>
               </div>
@@ -237,7 +219,7 @@ export default function Pricing() {
 
             {/* Quick Tiers */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
-              {implementationTiers.map((tier) => (
+              {usageTiers.map((tier) => (
                 <button
                   key={tier.minutes}
                   onClick={() => setCallMinutes(tier.minutes)}
@@ -318,6 +300,10 @@ export default function Pricing() {
                   </ul>
 
                   <button
+                    onClick={() => {
+                      setSelectedPlan(plan.id);
+                      window.location.href = '/sign-in';
+                    }}
                     className={`w-full py-3 rounded-lg font-semibold transition-all ${
                       plan.popular
                         ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700'
@@ -382,57 +368,6 @@ export default function Pricing() {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="py-12 px-4 bg-gray-900 border-t border-gray-800">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-4 gap-8">
-              <div>
-                <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
-                    <span className="text-black font-bold text-sm">FP</span>
-                  </div>
-                  <span className="text-xl font-bold text-white">FlyProx</span>
-                  <span className="text-xl font-bold text-yellow-400">AI</span>
-                </div>
-                <p className="text-gray-400 text-sm">
-                  AI-powered voice agents for modern businesses.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-white mb-4">Product</h4>
-                <ul className="space-y-2 text-gray-400 text-sm">
-                  <li><a href="/pricing" className="hover:text-yellow-400">Pricing</a></li>
-                  <li><a href="/sign-in" className="hover:text-yellow-400">Sign In</a></li>
-                  <li><a href="#demo" className="hover:text-yellow-400">Demo</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-white mb-4">Company</h4>
-                <ul className="space-y-2 text-gray-400 text-sm">
-                  <li><a href="/" className="hover:text-yellow-400">About</a></li>
-                  <li><a href="/help-center" className="hover:text-yellow-400">Help Center</a></li>
-                  <li><a href="#contact" className="hover:text-yellow-400">Contact</a></li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-white mb-4">Contact</h4>
-                <ul className="space-y-2 text-gray-400 text-sm">
-                  <li><a href="mailto:hello@flyprox.com" className="hover:text-yellow-400">hello@flyprox.com</a></li>
-                  <li><a href="tel:+1234567890" className="hover:text-yellow-400">+1 (234) 567-890</a></li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-              <p>&copy; 2024 FlyProx AI. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
-      </div>
 
       <style jsx>{`
         .slider::-webkit-slider-thumb {
