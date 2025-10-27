@@ -17,7 +17,7 @@ FlyProx построен по классической архитектуре
 Architecture
 Supabase OAuth
 Frontend (Next.js + Tailwind CSS + Supabase Auth)
-Express API (Routes → Controllers → Services)
+
 PostgreSQL 
 ↓
 MCP Integrations 
