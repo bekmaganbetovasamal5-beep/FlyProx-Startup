@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox Fix Test - FlyProx AI</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .test-section {
+            border: 1px solid #374151;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .test-description {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-black text-white p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-yellow-400">Checkbox & Radio Button Fix Test</h1>
+
+        <div class="test-section">
+            <p class="test-description">Basic Radio Buttons (should be 16px)</p>
+            <label class="flex items-center mb-2">
+                <input type="radio" name="test1" value="option1">
+                <span class="ml-2">Option 1 - should be compact</span>
+            </label>
+            <label class="flex items-center mb-2">
+                <input type="radio" name="test1" value="option2">
+                <span class="ml-2">Option 2 - should be compact</span>
+            </label>
+            <label class="flex items-center">
+                <input type="radio" name="test1" value="option3" checked>
+                <span class="ml-2">Option 3 - should be compact (checked)</span>
+            </label>
+        </div>
+
+        <div class="test-section">
+            <p class="test-description">Basic Checkboxes (should be 16px)</p>
+            <label class="flex items-center mb-2">
+                <input type="checkbox" name="check1" value="option1">
+                <span class="ml-2">Checkbox 1 - should be compact</span>
+            </label>
+            <label class="flex items-center mb-2">
+                <input type="checkbox" name="check2" value="option2" checked>
+                <span class="ml-2">Checkbox 2 - should be compact (checked)</span>
+            </label>
+            <label class="flex items-center">
+                <input type="checkbox" name="check3" value="option3">
+                <span class="ml-2">Checkbox 3 - should be compact</span>
+            </label>
+        </div>
+
+        <div class="test-section">
+            <p class="test-description">h-4 w-4 classes (should be exactly 16px with !important)</p>
+            <label class="flex items-center mb-2">
+                <input type="radio" name="test2" value="option1" class="h-4 w-4">
+                <span class="ml-2">Radio with h-4 w-4 classes</span>
+            </label>
+            <label class="flex items-center">
+                <input type="checkbox" name="check4" value="option1" class="h-4 w-4">
+                <span class="ml-2">Checkbox with h-4 w-4 classes</span>
+            </label>
+        </div>
+
+        <div class="test-section">
+            <p class="test-description">Sign-in form style (with mt-1 class)</p>
+            <label class="flex items-start">
+                <input
+                    type="checkbox"
+                    name="agreeToTerms"
+                    class="mt-1 h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                >
+                <span class="ml-2 text-sm">I agree to the Terms of Service and Privacy Policy (this should have proper alignment)</span>
+            </label>
+            <br><br>
+            <label class="flex items-start">
+                <input
+                    type="checkbox"
+                    name="agreeToMarketing"
+                    class="mt-1 h-4 w-4 bg-gray-700 border-gray-600 rounded text-yellow-400 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                >
+                <span class="ml-2 text-sm">I agree to receive marketing emails (this should have proper alignment)</span>
+            </label>
+        </div>
+
+        <div class="test-section">
+            <p class="test-description">Mixed elements (all should be 16px)</p>
+            <div class="space-y-2">
+                <label class="flex items-center">
+                    <input type="radio" name="test3" value="a" class="h-4 w-4">
+                    <span class="ml-2">Radio with classes</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="test3" value="b">
+                    <span class="ml-2">Radio without classes</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" name="check5" value="x" class="h-4 w-4">
+                    <span class="ml-2">Checkbox with classes</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" name="check6" value="y">
+                    <span class="ml-2">Checkbox without classes</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="mt-8 p-4 bg-gray-900 rounded-lg">
+            <h2 class="text-xl font-semibold mb-2 text-yellow-400">Expected Results:</h2>
+            <ul class="text-sm space-y-1 text-gray-300">
+                <li>✅ All radio buttons and checkboxes should be exactly 16x16px</li>
+                <li>✅ All elements should be compact and proportional to text</li>
+                <li>✅ Yellow check marks should be visible and properly sized</li>
+                <li>✅ Text alignment should be consistent across all elements</li>
+                <li>✅ No oversized elements should be visible</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
