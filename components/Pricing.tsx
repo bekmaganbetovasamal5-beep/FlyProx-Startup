@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 
 export default function Pricing() {
-  const router = useRouter();
   const [isAnnual, setIsAnnual] = useState(false);
 
   const plans = [
@@ -161,7 +159,7 @@ export default function Pricing() {
 
               {/* CTA button */}
               <button
-                onClick={() => plan.cta !== 'Contact Sales' && router.push('/sign-in')}
+                onClick={() => plan.cta !== 'Contact Sales' && (window.location.href = '/sign-in')}
                 className={`w-full py-3 rounded-lg font-semibold transition-all ${
                   plan.popular
                     ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-black hover:from-yellow-500 hover:to-yellow-700 transform hover:scale-105'

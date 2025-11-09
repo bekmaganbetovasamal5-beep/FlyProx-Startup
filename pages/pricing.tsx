@@ -93,27 +93,27 @@ export default function Pricing() {
 
   const usageTiers = [
     {
-      minutes: 500,
+      minutes: 495,
       price: 99
     },
     {
-      minutes: 1000,
+      minutes: 995,
       price: 199
     },
     {
-      minutes: 1500,
+      minutes: 1495,
       price: 299
     },
     {
-      minutes: 2000,
+      minutes: 1995,
       price: 399
     },
     {
-      minutes: 2500,
+      minutes: 2495,
       price: 499
     },
     {
-      minutes: 3000,
+      minutes: 2995,
       price: 599
     }
   ];

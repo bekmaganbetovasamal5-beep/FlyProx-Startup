@@ -1,9 +1,10 @@
 {
-  "name": "my-backend",
+  "name": "flyprox-ai",
   "version": "1.0.0",
-  "description": "Backend сервис проекта",
+  "description": "FlyProx AI - SaaS platform for AI voice agents",
   "main": "index.js",
   "type": "module",
+  "homepage": "https://flyprox.com",
   "scripts": {
     "start": "next start",
     "dev": "next dev",

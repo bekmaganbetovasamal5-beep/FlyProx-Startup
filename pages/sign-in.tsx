@@ -41,24 +41,7 @@ export default function SignIn() {
     console.log('✅ Form data saved:', formData);
   };
 
-  // Export all saved data to JSON file for easy viewing
-  const exportFormData = () => {
-    const allData = JSON.parse(localStorage.getItem('flyproxSubmissions') || '[]');
-
-    // Create downloadable JSON file
-    const dataStr = JSON.stringify(allData, null, 2);
-    const dataBlob = new Blob([dataStr], {type: 'application/json'});
-    const url = URL.createObjectURL(dataBlob);
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `flyprox_data_${new Date().toISOString().split('T')[0]}.json`;
-    link.click();
-
-    URL.revokeObjectURL(url);
-    console.log('✅ Data exported:', allData.length, 'entries');
-  };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -78,16 +61,33 @@ export default function SignIn() {
     }
 
     // Save all form data before submission
+    console.log('💾 Saving form data...');
     saveFormData();
+    console.log('✅ Form data saved successfully');
 
     // Simulate registration/sign in
     setTimeout(() => {
-      // Redirect to thank you page instead of showing alert
-      window.location.href = '/thank-you/';
-      localStorage.setItem('authToken', 'demo-token');
-      localStorage.setItem('userEmail', email);
-      localStorage.setItem('userName', firstName);
-      setIsLoading(false);
+      try {
+        console.log('🚀 Starting redirect process...');
+
+        // Save authentication data first
+        localStorage.setItem('authToken', 'demo-token');
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userName', firstName);
+        console.log('✅ Authentication data saved');
+
+        // Clear loading state
+        setIsLoading(false);
+        console.log('✅ Loading state cleared');
+
+        // Redirect to thank you page as the LAST step
+        console.log('🔄 Redirecting to /thank-you/');
+        window.location.href = '/thank-you/';
+      } catch (error) {
+        console.error('❌ Error during redirect:', error);
+        setError('An error occurred during redirect. Please try again.');
+        setIsLoading(false);
+      }
     }, 1500);
   };
 
@@ -127,26 +127,7 @@ export default function SignIn() {
               Enter your details to access your account
             </p>
 
-            {/* Data Management Buttons */}
-            <div className="flex gap-2 mb-4 justify-center">
-              <a
-                href="/view-data.html"
-                target="_blank"
-                className="px-3 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 rounded transition-colors"
-                title="Открыть страницу для просмотра всех данных"
-              >
-                📊 Посмотреть данные
-              </a>
-              <button
-                type="button"
-                onClick={exportFormData}
-                className="px-3 py-1 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 rounded transition-colors"
-                title="Скачать все данные в JSON файл"
-              >
-                📥 Экспорт данных
-              </button>
-            </div>
-
+            
             {/* Error Message */}
             {error && (
               <div className="mb-6 p-3 bg-red-500/10 border border-red-500/50 rounded-lg">
@@ -342,7 +323,7 @@ export default function SignIn() {
                     Creating Account...
                   </span>
                 ) : (
-                  'Get Started'
+                  'Start'
                 )}
               </button>
             </form>
